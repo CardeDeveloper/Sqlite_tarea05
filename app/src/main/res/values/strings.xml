@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tarea2</string>
+    <string name="app_name">tarea3</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="first_section_tab">Technology</string>
@@ -7,6 +7,14 @@
     <string name="third_section_tab">Electronics</string>
     <string name="item_product_btn_share">SHARE</string>
     <string name="item_product_btn_more">SEE MORE</string>
+
+    <string name="activity_product_btn_save">SAVE</string>
+    <string name="activity_product_btn_cancel">CANCEL</string>
+
+    <string name="activity_product_input_title">Title</string>
+    <string name="activity_product_input_store">Store</string>
+    <string name="activity_product_input_location">Location</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

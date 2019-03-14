@@ -1,4 +1,4 @@
-package com.example.tarea2.fragments;
+package com.example.tarea3.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,15 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.tarea2.R;
-import com.example.tarea2.adapters.AdapterProduct;
-import com.example.tarea2.beans.itemProduct;
+import com.example.tarea3.MainActivity;
+import com.example.tarea3.ProductActivity;
+import com.example.tarea3.R;
+import com.example.tarea3.adapters.AdapterProduct;
+import com.example.tarea3.beans.itemProduct;
+import com.example.tarea3.tools.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentElectronics extends Fragment implements AdapterProduct.OnPhoneClickListener {
     private RecyclerView listProducts;
+    private List<itemProduct> itemProducts;
 
     public static FragmentTechnology newInstance() {
 
@@ -45,13 +49,13 @@ public class FragmentElectronics extends Fragment implements AdapterProduct.OnPh
     }
 
     private void fillProducts() {
-        List<itemProduct> itemProducts = new ArrayList<>();
+       itemProducts = new ArrayList<>();
         for(int i = 0; i < 10; i++){
             if (i %2 == 0){
-                itemProducts.add(new itemProduct("Producto " + (i +1), "BestBuy", "3141212323", 4, "Guadalajara, Jalisco"));
+                itemProducts.add(new itemProduct(i,"Producto " + (i +1), "BestBuy", "3141212323", 4, "Guadalajara, Jalisco"));
 
             }else{
-                itemProducts.add(new itemProduct("Producto " + (i +1), "BestBuy", "3141212323", 5, "Guadalajara, Jalisco"));
+                itemProducts.add(new itemProduct(i,"Producto " + (i +1), "BestBuy", "3141212323", 5, "Guadalajara, Jalisco"));
             }
 
         }
@@ -65,8 +69,23 @@ public class FragmentElectronics extends Fragment implements AdapterProduct.OnPh
     }
 
     @Override
-    public void onTabItem(String item) {
-        Toast.makeText(getContext(), item,
-                Toast.LENGTH_LONG).show();
+    public void onTabItem(itemProduct item) {
+        startSubActivity(item.getCode());
+    }
+    private void startSubActivity(int item) {
+        Intent intent = new Intent(getActivity(), ProductActivity.class);
+        intent.putExtra(Constants.ITEM, itemProducts.get(item));
+        ((MainActivity) getContext()).startActivityForResult(intent, 3);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        itemProduct itemProduct = data.getParcelableExtra("ITEM");
+
+        itemProducts.set(itemProduct.getCode(), itemProduct);
+        listProducts.setAdapter(new AdapterProduct(itemProducts, this));
+        listProducts.getAdapter().notifyDataSetChanged();
     }
 }

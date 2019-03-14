@@ -1,4 +1,4 @@
-package com.example.tarea2.adapters;
+package com.example.tarea3.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tarea2.R;
-import com.example.tarea2.beans.itemProduct;
+import com.example.tarea3.R;
+import com.example.tarea3.beans.itemProduct;
 
 import java.util.List;
 
@@ -77,7 +77,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onTabItem(itemProduct.toString());
+                listener.onTabItem(itemProduct);
             }
         });
     }
@@ -115,6 +115,6 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
 
     public interface OnPhoneClickListener {
         void onPhoneClick(String phone);
-        void onTabItem(String item);
+        void onTabItem(itemProduct item);
     }
 }

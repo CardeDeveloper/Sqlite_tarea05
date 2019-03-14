@@ -1,6 +1,5 @@
-package com.example.tarea2.fragments;
+package com.example.tarea3.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,19 +11,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tarea2.R;
-import com.example.tarea2.adapters.AdapterProduct;
-import com.example.tarea2.beans.itemProduct;
+import com.example.tarea3.MainActivity;
+import com.example.tarea3.ProductActivity;
+import com.example.tarea3.R;
+import com.example.tarea3.adapters.AdapterProduct;
+import com.example.tarea3.beans.itemProduct;
+import com.example.tarea3.tools.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class FragmentTechnology extends Fragment implements AdapterProduct.OnPhoneClickListener {
+public class FragmentHome extends Fragment implements AdapterProduct.OnPhoneClickListener {
     private RecyclerView listProducts;
+    private List<itemProduct> itemProducts;
 
     public static FragmentTechnology newInstance() {
 
@@ -48,13 +49,13 @@ public class FragmentTechnology extends Fragment implements AdapterProduct.OnPho
     }
 
     private void fillProducts() {
-        List<itemProduct> itemProducts = new ArrayList<>();
+        itemProducts = new ArrayList<>();
         for(int i = 0; i < 10; i++){
             if (i %2 == 0){
-                itemProducts.add(new itemProduct("Producto " + (i +1), "BestBuy", "3141212323", 1, "Guadalajara, Jalisco"));
+                itemProducts.add(new itemProduct(i,"Producto " + (i +1), "BestBuy", "3141212323", 2, "Guadalajara, Jalisco"));
 
             }else{
-                itemProducts.add(new itemProduct("Producto " + (i +1), "BestBuy", "3141212323", 0, "Guadalajara, Jalisco"));
+                itemProducts.add(new itemProduct(i,"Producto " + (i +1), "BestBuy", "3141212323", 3, "Guadalajara, Jalisco"));
             }
 
         }
@@ -68,8 +69,24 @@ public class FragmentTechnology extends Fragment implements AdapterProduct.OnPho
     }
 
     @Override
-    public void onTabItem(String item) {
-        Toast.makeText(getContext(), item,
-                Toast.LENGTH_LONG).show();
+    public void onTabItem(itemProduct item) {
+        startSubActivity(item.getCode());
+    }
+
+    private void startSubActivity(int item) {
+        Intent intent = new Intent(getActivity(), ProductActivity.class);
+        intent.putExtra(Constants.ITEM, itemProducts.get(item));
+        ((MainActivity) getContext()).startActivityForResult(intent, 2);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        itemProduct itemProduct = data.getParcelableExtra("ITEM");
+
+        itemProducts.set(itemProduct.getCode(), itemProduct);
+        listProducts.setAdapter(new AdapterProduct(itemProducts, this));
+        listProducts.getAdapter().notifyDataSetChanged();
     }
 }

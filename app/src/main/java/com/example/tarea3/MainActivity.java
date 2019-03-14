@@ -1,5 +1,7 @@
-package com.example.tarea2;
+package com.example.tarea3;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,9 +21,11 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-import com.example.tarea2.fragments.FragmentElectronics;
-import com.example.tarea2.fragments.FragmentHome;
-import com.example.tarea2.fragments.FragmentTechnology;
+import com.example.tarea3.R;
+import com.example.tarea3.fragments.FragmentElectronics;
+import com.example.tarea3.fragments.FragmentHome;
+import com.example.tarea3.fragments.FragmentTechnology;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    private FragmentTechnology fragmentTechnology;
+    private FragmentHome fragmentHome;
+    private FragmentElectronics fragmentElectronics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +68,28 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch(requestCode){
+            case 1:
+                if(resultCode == Activity.RESULT_OK){
+                    fragmentTechnology.onActivityResult(requestCode, resultCode, data);
+                }
+                break;
+            case 2:
+                if(resultCode == Activity.RESULT_OK){
+                    fragmentHome.onActivityResult(requestCode, resultCode, data);
+                }
+                break;
+            case 3:
+                if(resultCode == Activity.RESULT_OK){
+                    fragmentElectronics.onActivityResult(requestCode, resultCode, data);
+                }
+                break;
+        }
+    }
+
 
 
     @Override
@@ -116,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
+
+
     }
 
     /**
@@ -128,24 +161,38 @@ public class MainActivity extends AppCompatActivity {
             super(fm);
         }
 
+
+
+
         @Override
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FragmentTechnology();
+                    if(fragmentTechnology == null){
+                        fragmentTechnology = new FragmentTechnology();
+                    }
+                    return fragmentTechnology;
                 case 1:
-                    return new FragmentHome();
+                    if(fragmentHome == null){
+                        fragmentHome = new FragmentHome();
+                    }
+                    return fragmentHome;
                 case 2:
-                    return new FragmentElectronics();
+                    if(fragmentElectronics == null){
+                        fragmentElectronics = new FragmentElectronics();
+                    }
+                    return fragmentElectronics;
                 default:
                     return new FragmentTechnology();
             }
-        };
+        }
         /*public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
         }*/
+
+
 
         @Override
         public int getCount() {
