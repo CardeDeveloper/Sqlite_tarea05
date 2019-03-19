@@ -1,7 +1,8 @@
-package com.example.tarea3;
+package com.example.tarea4;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +13,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,10 +21,11 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
-import com.example.tarea3.R;
-import com.example.tarea3.fragments.FragmentElectronics;
-import com.example.tarea3.fragments.FragmentHome;
-import com.example.tarea3.fragments.FragmentTechnology;
+import com.example.tarea4.R;
+import com.example.tarea4.fragments.FragmentElectronics;
+import com.example.tarea4.fragments.FragmentHome;
+import com.example.tarea4.fragments.FragmentTechnology;
+import com.example.tarea4.tools.Constants;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -107,7 +108,20 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_privacy_policy) {
+            Intent intent = new Intent(MainActivity.this,PrivacyPolicyActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.action_LogOut) {
+            SharedPreferences settings = getSharedPreferences(Constants.MAIN_PACKAGE, MODE_PRIVATE);
+            settings.edit().clear().commit();
+
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
             return true;
         }
 

@@ -1,4 +1,4 @@
-package com.example.tarea3.beans;
+package com.example.tarea4.beans;
 
 import android.os.Parcel;
 import android.os.Parcelable;

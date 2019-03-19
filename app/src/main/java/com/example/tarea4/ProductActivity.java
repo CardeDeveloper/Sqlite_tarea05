@@ -1,16 +1,15 @@
-package com.example.tarea3;
+package com.example.tarea4;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.tarea3.beans.itemProduct;
-import com.example.tarea3.tools.Constants;
+import com.example.tarea4.beans.itemProduct;
+import com.example.tarea4.tools.Constants;
 
 public class ProductActivity extends AppCompatActivity {
 

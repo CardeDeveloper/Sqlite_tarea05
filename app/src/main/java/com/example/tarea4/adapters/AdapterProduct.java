@@ -1,4 +1,4 @@
-package com.example.tarea3.adapters;
+package com.example.tarea4.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.tarea3.R;
-import com.example.tarea3.beans.itemProduct;
+import com.example.tarea4.R;
+import com.example.tarea4.beans.itemProduct;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.tarea3.fragments;
+package com.example.tarea4.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,14 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.tarea3.MainActivity;
-import com.example.tarea3.ProductActivity;
-import com.example.tarea3.R;
-import com.example.tarea3.adapters.AdapterProduct;
-import com.example.tarea3.beans.itemProduct;
-import com.example.tarea3.tools.Constants;
+import com.example.tarea4.MainActivity;
+import com.example.tarea4.ProductActivity;
+import com.example.tarea4.R;
+import com.example.tarea4.adapters.AdapterProduct;
+import com.example.tarea4.beans.itemProduct;
+import com.example.tarea4.tools.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
