@@ -5,6 +5,8 @@ public class User {
     private String password;
     private boolean isLogged;
 
+    public User(){}
+
     public User(String name) {
         this.name = name;
     }

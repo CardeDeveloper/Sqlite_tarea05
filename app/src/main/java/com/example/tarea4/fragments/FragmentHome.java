@@ -17,6 +17,8 @@ import com.example.tarea4.ProductActivity;
 import com.example.tarea4.R;
 import com.example.tarea4.adapters.AdapterProduct;
 import com.example.tarea4.beans.itemProduct;
+import com.example.tarea4.db.DataBaseHandler;
+import com.example.tarea4.db.ItemProductControl;
 import com.example.tarea4.tools.Constants;
 
 import java.util.ArrayList;
@@ -49,15 +51,9 @@ public class FragmentHome extends Fragment implements AdapterProduct.OnPhoneClic
 
     private void fillProducts() {
         itemProducts = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-            if (i %2 == 0){
-                itemProducts.add(new itemProduct(i,"Producto " + (i +1), "BestBuy", "3141212323", 2, "Guadalajara, Jalisco"));
+        ItemProductControl itemProductControl = new ItemProductControl();
 
-            }else{
-                itemProducts.add(new itemProduct(i,"Producto " + (i +1), "BestBuy", "3141212323", 3, "Guadalajara, Jalisco"));
-            }
-
-        }
+        itemProducts = itemProductControl.getItemProductsByCategory(1, DataBaseHandler.getInstance(getActivity()));
         listProducts.setAdapter(new AdapterProduct(itemProducts, this));
     }
     @Override

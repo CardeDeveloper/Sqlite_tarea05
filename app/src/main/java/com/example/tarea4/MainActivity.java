@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,6 +30,7 @@ import com.example.tarea4.tools.Constants;
 
 
 public class MainActivity extends AppCompatActivity {
+    FloatingActionButton floatBtn;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -66,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+        floatBtn = findViewById(R.id.activity_main_floatBtn);
+
+        floatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ActivityItem.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

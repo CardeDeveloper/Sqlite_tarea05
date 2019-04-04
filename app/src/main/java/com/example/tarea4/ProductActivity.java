@@ -30,7 +30,7 @@ public class ProductActivity extends AppCompatActivity {
         cancel = (Button) findViewById(R.id.activity_detail_cancel);
 
         title.setText(item.getTitle());
-        store.setText(item.getStore());
+        store.setText(item.getStore().toString());
         location.setText(item.getLocation());
         switch(item.getImage()){
             case 0:
@@ -52,7 +52,8 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 item.setTitle(title.getText().toString());
-                item.setStore(store.getText().toString());
+                item.getStore().setName(store.getText().toString());
+                item.getStore().getCity().setName(location.getText().toString());
                 item.setLocation(location.getText().toString());
                 Intent intent = new Intent();
                 intent.putExtra(Constants.ITEM, item);

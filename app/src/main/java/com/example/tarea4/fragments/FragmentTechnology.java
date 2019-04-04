@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.example.tarea4.ProductActivity;
 import com.example.tarea4.R;
 import com.example.tarea4.adapters.AdapterProduct;
 import com.example.tarea4.beans.itemProduct;
+import com.example.tarea4.db.DataBaseHandler;
+import com.example.tarea4.db.ItemProductControl;
 import com.example.tarea4.tools.Constants;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import java.util.List;
 
 public class FragmentTechnology extends Fragment implements AdapterProduct.OnPhoneClickListener {
     private RecyclerView listProducts;
-    private List<itemProduct> itemProducts;
+    private ArrayList<itemProduct> itemProducts;
 
 
     public static FragmentTechnology newInstance() {
@@ -51,17 +54,10 @@ public class FragmentTechnology extends Fragment implements AdapterProduct.OnPho
 
     private void fillProducts() {
         itemProducts = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-            if (i %2 == 0){
-                itemProducts.add(new itemProduct(i,"Producto " + (i +1), "BestBuy", "3141212323", 1, "Guadalajara, Jalisco"));
+        ItemProductControl itemProductControl = new ItemProductControl();
 
-            }else{
-                itemProducts.add(new itemProduct(i,"Producto " + (i +1), "BestBuy", "3141212323", 0, "Guadalajara, Jalisco"));
-            }
-
-
-
-        }
+        itemProducts = itemProductControl.getItemProductsByCategory(0, DataBaseHandler.getInstance(getActivity()));
+        Log.e("e", itemProducts.toString());
         listProducts.setAdapter(new AdapterProduct(itemProducts, this));
     }
     @Override

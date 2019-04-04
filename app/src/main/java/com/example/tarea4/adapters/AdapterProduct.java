@@ -40,7 +40,7 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
         final itemProduct itemProduct = itemProducts.get(position);
 
         viewHolder.txtTitle.setText(itemProduct.getTitle());
-        viewHolder.txtStore.setText(itemProduct.getStore());
+        viewHolder.txtStore.setText(itemProduct.getStore().toString());
         viewHolder.txtPhone.setText(itemProduct.getPhone());
         viewHolder.txtLocation.setText(itemProduct.getLocation());
         switch(itemProduct.getImage()){
